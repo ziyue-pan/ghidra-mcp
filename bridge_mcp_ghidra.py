@@ -1091,6 +1091,9 @@ def main():
     if args.transport == "sse":
         mcp.settings.log_level = "INFO"
         mcp.settings.host = args.mcp_host
+        if args.mcp_host not in ("127.0.0.1", "localhost", "::1"):
+            mcp.settings.transport_security = None
+
         if args.mcp_port:
             mcp.settings.port = args.mcp_port
         logger.info("Starting MCP bridge (SSE)")
